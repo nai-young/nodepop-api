@@ -1,4 +1,4 @@
-const homeRoute = require('../routes/index')
+// const homeRoute = require('../routes/index')
 const db = require('./connectMongoose')
 const Anuncio = require('../models/anuncio')
 
