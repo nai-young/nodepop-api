@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser')
 var logger = require('morgan')
 const bodyParser = require('body-parser')
 const cors = require('cors')
+const anunciosRoute = require('./routes/anunciosRoute')
 
 var app = express()
 
@@ -15,11 +16,15 @@ app.set('view engine', 'ejs')
 app.use(logger('dev'))
 app.use(cors())
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
+app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 
-require('./routes/anunciosRoute')(app)
+app.get('/', (req, res) => {
+  res.json({ message: 'Welcome to my app' });
+})
+
+app.use('/', require('./routes/anunciosRoute'))
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -37,7 +42,7 @@ app.use(function (err, req, res, next) {
   res.render('error')
 })
 
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 4000
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`)
 })

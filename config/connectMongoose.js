@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const db = mongoose.connection
+const MongoClient = require('mongodb').MongoClient
 
 mongoose.Promise = global.Promise
 
@@ -14,4 +14,5 @@ mongoose.connect(dbUrl, {
   console.error(`Error connecting to database: ${err}`)
 })
 
+const db = mongoose.connection
 module.exports = db

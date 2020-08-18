@@ -1,21 +1,12 @@
 const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 
-const anuncioSchema = mongoose.Schema({
-  nombre: {
-    type: String
-  },
-  venta: {
-    type: Boolean
-  },
-  precio: {
-    type: Number
-  },
-  foto: {
-    type: String
-  },
-  tags: {
-    type: Array
-  }
+const anuncioSchema = new Schema({
+  nombre: String,
+  venta: String,
+  precio: Number,
+  foto: String,
+  tags: [String]
 })
 
 module.exports = mongoose.model('Anuncio', anuncioSchema)

@@ -1,13 +1,15 @@
 const Anuncio = require('../models/anuncio')
+const anuncio = require('../models/anuncio')
 
 exports.allAnuncios = (req, res) => {
-  const Anuncio = require('../models/anuncio')
-  const nombre = req.body.nombre
+  console.log('hola')
+  const nombre = req.query.nombre
   const expresion = nombre ? { nombre: { $regex: new RegExp(nombre), $options: 'i' } } : {}
 
-  Anuncio.find(expresion)
-    .then(res => { res.send(res) })
-    .catch(err => { res.send(err) })
+  Anuncio.find(function (err, anuncios) {
+    if (err) throw err
+    res.json(anuncios.anuncios)
+  })
 }
 
 exports.creaAnuncio = (req, res) => {
